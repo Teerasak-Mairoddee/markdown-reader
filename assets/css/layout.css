@@ -166,6 +166,7 @@
   font-size: 14px;
   transform: translateX(-50%);
 }
+.toast a { color: inherit; font-weight: 600; text-decoration: underline; }
 
 /* Narrow screens: sidebar becomes a drawer. */
 

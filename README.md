@@ -17,7 +17,9 @@ Everything runs in the browser. Files are never uploaded anywhere.
 - Links between open documents (`[next](chapter-2.md)`) and to headings (`#section`)
 - Light and dark themes
 - **Save as PDF** prints only the document: light theme, wrapped code, page-break rules,
-  expanded `<details>`, link URLs shown, and the PDF named after the file
+  expanded `<details>`, link URLs shown, and the PDF named after the file.
+  Browsers without a print dialog (for example in-app browsers on phones) get a
+  generated PDF download instead
 
 ## Project structure
 
@@ -36,11 +38,13 @@ assets/
     renderer.js            Markdown -> sanitized DOM, heading ids, images, highlighting
     view.js                DOM updates: file list, TOC, document, toasts
     theme.js               Light/dark toggle
-    print.js               Save as PDF (print dialog, title, details)
+    print.js               Save as PDF (print dialog, with fallback)
+    pdf-export.js          PDF file generation when printing is unavailable
 vendor/                    Pinned third-party libraries (no CDN, no build step)
   marked/                  marked 18.1.1 (MIT)
   dompurify/               DOMPurify 3.4.17 (Apache-2.0 / MPL-2.0)
   highlight/               highlight.js 11.11.1 (BSD-3-Clause)
+  html2pdf/                html2pdf.js 0.14.0 (MIT), loaded only for the PDF fallback
 samples/welcome.md         Sample document
 .github/workflows/         GitHub Pages deployment
 ```
@@ -69,6 +73,11 @@ python3 -m http.server 8000
 
 Press **Save as PDF** (or Ctrl/Cmd+P) and pick **Save as PDF** as the printer.
 For the cleanest result, turn off **Headers and footers** in the print dialog.
+
+If the browser has no print dialog (common in in-app browsers on phones), the
+app builds the PDF itself and downloads it. Those pages are images, so text in
+them cannot be selected; opening the site in Safari or Chrome gives the better
+printed PDF.
 
 ## Updating the vendored libraries
 

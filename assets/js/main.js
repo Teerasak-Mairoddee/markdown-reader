@@ -97,7 +97,12 @@ function init() {
 
   document.getElementById('sample-btn').addEventListener('click', loadSample);
 
-  initPrint(els.pdfBtn, els.document, () => store.getActiveDoc()?.name ?? null);
+  initPrint({
+    button: els.pdfBtn,
+    documentEl: els.document,
+    getFileName: () => store.getActiveDoc()?.name ?? null,
+    notify: toast,
+  });
 
   els.sidebarToggle.addEventListener('click', () => {
     setSidebarOpen(!els.sidebar.classList.contains('is-open'));

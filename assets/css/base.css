@@ -108,8 +108,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .icon-btn:hover { background: var(--surface-2); color: var(--text); }
 
 .btn--primary { background: var(--accent); color: var(--accent-contrast); }
-.btn--primary:hover:not(:disabled) { background: var(--accent-hover); }
-.btn--primary:disabled { opacity: .45; cursor: not-allowed; }
+.btn--primary:hover { background: var(--accent-hover); }
+.btn[aria-busy="true"] { opacity: .6; cursor: progress; }
 
 .btn--ghost { background: var(--surface); border-color: var(--border); color: var(--text); }
 .btn--ghost:hover { background: var(--surface-2); }

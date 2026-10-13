@@ -69,7 +69,6 @@ export function showDocument(name, fragment) {
   els.document.hidden = false;
   els.dropzone.hidden = true;
   els.docName.textContent = name;
-  els.pdfBtn.disabled = false;
 }
 
 export function showEmpty() {
@@ -77,7 +76,6 @@ export function showEmpty() {
   els.document.hidden = true;
   els.dropzone.hidden = false;
   els.docName.textContent = '';
-  els.pdfBtn.disabled = true;
   renderToc([]);
 }
 
@@ -87,9 +85,23 @@ export function setSidebarOpen(open) {
 }
 
 let toastTimer;
-export function toast(message) {
-  els.toast.textContent = message;
+/**
+ * Show a short message, optionally followed by a link.
+ * @param {string} message
+ * @param {{href: string, label: string, download?: string}} [link]
+ */
+export function toast(message, link) {
+  els.toast.replaceChildren(message);
+  if (link) {
+    const a = document.createElement('a');
+    a.href = link.href;
+    a.textContent = link.label;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    if (link.download) a.download = link.download;
+    els.toast.append(' ', a, '.');
+  }
   els.toast.hidden = false;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { els.toast.hidden = true; }, 4000);
+  toastTimer = setTimeout(() => { els.toast.hidden = true; }, link ? 15000 : 4000);
 }

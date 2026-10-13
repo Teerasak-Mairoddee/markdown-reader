@@ -126,3 +126,38 @@
   border-radius: 4px;
   font-size: .85em;
 }
+
+/* Off-screen copy used to generate a PDF file (see pdf-export.js).
+   Light colours only, and no color-mix(), which the PDF renderer cannot parse. */
+
+.pdf-stage {
+  position: fixed;
+  top: 0;
+  left: -10000px;
+  width: 182mm; /* A4 width minus margins */
+  background: #fff;
+}
+
+.pdf-export {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --border: #d0d7de;
+  --text: #111111;
+  --text-muted: #57606a;
+  --accent: #1d4ed8;
+  --code-bg: #f6f8fa;
+  --quote: #57606a;
+  color-scheme: light;
+  font-size: 11pt;
+  line-height: 1.55;
+  background: #fff;
+}
+
+.pdf-export .heading-anchor { display: none; }
+.pdf-export tr:nth-child(2n) td { background: #f8f9fa; }
+.pdf-export pre { overflow: visible; white-space: pre-wrap; word-break: break-word; }
+.pdf-export table { display: table; width: auto; overflow: visible; }
+.pdf-export summary { display: block; }
+.pdf-export .pdf-keep > :last-child { margin-bottom: 1em; }
+.pdf-export > :first-child > :first-child { margin-top: 0; }

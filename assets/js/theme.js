@@ -27,6 +27,11 @@ export function initTheme(toggleButton) {
     syncCodeTheme();
   });
 
-  window.addEventListener('beforeprint', () => syncCodeTheme('light'));
-  window.addEventListener('afterprint', () => syncCodeTheme());
+  window.addEventListener('beforeprint', () => useLightCodeTheme(true));
+  window.addEventListener('afterprint', () => useLightCodeTheme(false));
+}
+
+/** Force the light code theme (printing, PDF export), or go back to the current theme. */
+export function useLightCodeTheme(on) {
+  syncCodeTheme(on ? 'light' : undefined);
 }
