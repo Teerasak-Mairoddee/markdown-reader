@@ -122,6 +122,7 @@
 .dropzone h1 { margin: 12px 0 8px; font-size: 22px; }
 .dropzone p { margin: 0 0 20px; color: var(--text-muted); }
 .dropzone__note { margin-top: 20px !important; font-size: 13px; }
+.dropzone__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 
 .document {
   max-width: var(--doc-max);
@@ -168,6 +169,63 @@
 }
 .toast a { color: inherit; font-weight: 600; text-decoration: underline; }
 
+/* Paste dialog */
+
+.paste-dialog {
+  width: min(760px, calc(100vw - 32px));
+  height: min(640px, calc(100vh - 32px));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+.paste-dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+
+.paste-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  padding: 16px 20px 20px;
+}
+
+.paste-dialog__header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.paste-dialog__header h2 { margin: 0; font-size: 18px; }
+
+.paste-dialog__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.paste-dialog__spacer { flex: 1; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field--grow { flex: 1; min-height: 0; }
+.field__label { color: var(--text-muted); font-size: 13px; font-weight: 600; }
+.field__row { display: flex; align-items: center; gap: 6px; }
+.field__suffix { color: var(--text-muted); }
+
+.field__input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font: inherit;
+}
+.field__input:focus { border-color: var(--accent); outline: none; }
+
+.field__textarea {
+  flex: 1;
+  min-height: 0;
+  resize: none;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 /* Narrow screens: sidebar becomes a drawer. */
 
 @media (max-width: 860px) {
@@ -191,10 +249,27 @@
 
   .main { padding: 16px 16px 48px; }
   .document { padding: 28px 20px; border-radius: 10px; }
+
+  /* Full-screen sheet; dvh keeps the buttons above the on-screen keyboard. */
+  .paste-dialog {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .paste-dialog__form { padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); }
+  /* 16px stops iOS Safari from zooming into focused fields. */
+  .field__input { font-size: 16px; }
 }
 
 @media (max-width: 520px) {
   .toolbar__title { display: none; }
-  .btn span { display: none; }
-  .btn { padding: 0 10px; }
+  .toolbar .btn span { display: none; }
+  .toolbar .btn { padding: 0 10px; }
+
+  .paste-dialog__spacer { display: none; }
+  .paste-dialog__actions .btn { flex: 1 1 0; height: 44px; }
+  .paste-dialog__actions #paste-clipboard { flex-basis: 100%; }
 }

@@ -6,7 +6,8 @@
 // Some browsers, notably in-app browsers on phones, ignore window.print().
 // When no print dialog opens, a PDF file is generated and downloaded instead.
 
-import { createPdf, deliverPdf } from './pdf-export.js';
+import { createPdf } from './pdf-export.js';
+import { deliverFile } from './download.js';
 
 const PRINT_TIMEOUT_MS = 1200;
 
@@ -50,7 +51,7 @@ export function initPrint({ button, documentEl, getFileName, notify }) {
     try {
       const blob = await createPdf(documentEl);
       const name = pdfName();
-      const url = deliverPdf(blob, name);
+      const url = deliverFile(blob, name);
       notify('PDF ready. If it did not download,', { href: url, label: 'open the PDF', download: name });
     } catch (err) {
       console.error(err);
