@@ -1,10 +1,21 @@
-/* Typography for rendered Markdown. Shared by screen and print. */
+/* Typography for rendered Markdown. Shared by screen and print.
+   Sizes and spacing are variables so paper output (print.css, .pdf-export)
+   can use a tighter scale. */
 
 .markdown-body {
+  --doc-size: 16px;
+  --doc-leading: 1.7;
+  --h1-size: 2em;
+  --h2-size: 1.5em;
+  --h3-size: 1.25em;
+  --heading-gap: 1.8em;
+  --block-gap: 1em;
+  --code-size: .875em;
+
   color: var(--text);
   font-family: var(--font-doc);
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: var(--doc-size);
+  line-height: var(--doc-leading);
   overflow-wrap: break-word;
 }
 
@@ -17,15 +28,15 @@
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-  margin: 1.8em 0 .6em;
+  margin: var(--heading-gap) 0 .6em;
   font-weight: 650;
   line-height: 1.25;
   scroll-margin-top: calc(var(--toolbar-h) + 16px);
 }
 
-.markdown-body h1 { font-size: 2em; padding-bottom: .3em; border-bottom: 1px solid var(--border); }
-.markdown-body h2 { font-size: 1.5em; padding-bottom: .25em; border-bottom: 1px solid var(--border); }
-.markdown-body h3 { font-size: 1.25em; }
+.markdown-body h1 { font-size: var(--h1-size); padding-bottom: .3em; border-bottom: 1px solid var(--border); }
+.markdown-body h2 { font-size: var(--h2-size); padding-bottom: .25em; border-bottom: 1px solid var(--border); }
+.markdown-body h3 { font-size: var(--h3-size); }
 .markdown-body h4 { font-size: 1.05em; }
 .markdown-body h5 { font-size: .95em; }
 .markdown-body h6 { font-size: .9em; color: var(--text-muted); }
@@ -37,7 +48,7 @@
 .markdown-body pre,
 .markdown-body table,
 .markdown-body details,
-.markdown-body hr { margin: 0 0 1em; }
+.markdown-body hr { margin: 0 0 var(--block-gap); }
 
 .markdown-body a { color: var(--accent); text-underline-offset: 2px; }
 
@@ -64,7 +75,7 @@
 .markdown-body code,
 .markdown-body kbd {
   font-family: var(--font-mono);
-  font-size: .875em;
+  font-size: var(--code-size);
 }
 
 .markdown-body :not(pre) > code {
@@ -134,7 +145,7 @@
   position: fixed;
   top: 0;
   left: -10000px;
-  width: 182mm; /* A4 width minus margins */
+  width: 182mm; /* A4 width minus 14mm side margins */
   background: #fff;
 }
 
@@ -149,9 +160,17 @@
   --code-bg: #f6f8fa;
   --quote: #57606a;
   color-scheme: light;
-  font-size: 11pt;
-  line-height: 1.55;
   background: #fff;
+
+  /* Paper scale: keep in sync with print.css */
+  --doc-size: 10pt;
+  --doc-leading: 1.45;
+  --h1-size: 1.6em;
+  --h2-size: 1.3em;
+  --h3-size: 1.12em;
+  --heading-gap: 1.2em;
+  --block-gap: .7em;
+  --code-size: .82em;
 }
 
 .pdf-export .heading-anchor { display: none; }
@@ -159,5 +178,7 @@
 .pdf-export pre { overflow: visible; white-space: pre-wrap; word-break: break-word; }
 .pdf-export table { display: table; width: auto; overflow: visible; }
 .pdf-export summary { display: block; }
-.pdf-export .pdf-keep > :last-child { margin-bottom: 1em; }
+.pdf-export .pdf-keep > :last-child { margin-bottom: var(--block-gap); }
+.pdf-export pre { padding: 8px 10px; }
+.pdf-export :is(th, td) { padding: 4px 9px; }
 .pdf-export > :first-child > :first-child { margin-top: 0; }
