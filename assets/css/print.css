@@ -2,7 +2,7 @@
 
 @page {
   size: auto;
-  margin: 15mm 14mm;
+  margin: 18mm 16mm;
 }
 
 :root,
@@ -45,21 +45,7 @@ body {
   box-shadow: none;
 }
 
-/* Paper scale: keep in sync with .pdf-export in document.css */
-.markdown-body {
-  --doc-size: 10pt;
-  --doc-leading: 1.45;
-  --h1-size: 1.6em;
-  --h2-size: 1.3em;
-  --h3-size: 1.12em;
-  --heading-gap: 1.2em;
-  --block-gap: .7em;
-  --code-size: .82em;
-}
-
-.markdown-body pre { padding: 8px 10px; }
-.markdown-body th,
-.markdown-body td { padding: 4px 9px; }
+.markdown-body { font-size: 11pt; line-height: 1.55; }
 
 /* Keep headings with the content that follows them. */
 .markdown-body :is(h1, h2, h3, h4, h5, h6) {

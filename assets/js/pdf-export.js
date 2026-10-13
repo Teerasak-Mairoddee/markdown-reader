@@ -47,7 +47,7 @@ export async function createPdf(documentEl) {
   try {
     return await html2pdf()
       .set({
-        margin: [15, 14, 15, 14],
+        margin: [14, 14, 16, 14],
         image: { type: 'jpeg', quality: 0.95 },
         html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
