@@ -10,6 +10,7 @@ Everything runs in the browser. Files are never uploaded anywhere.
 ## Features
 
 - Open `.md` files with the **Open** button or by dragging them onto the page
+- **Paste** Markdown text into a box, then download it as a `.md` file or preview it in the reader
 - Several files at once, listed in a sidebar, plus a table of contents
 - GitHub Flavored Markdown: tables, task lists, strikethrough, autolinks
 - Syntax highlighting for fenced code blocks
@@ -40,6 +41,8 @@ assets/
     theme.js               Light/dark toggle
     print.js               Save as PDF (print dialog, with fallback)
     pdf-export.js          PDF file generation when printing is unavailable
+    paste.js               Paste dialog: download pasted text as .md or preview it
+    download.js            Shared file download helper
 vendor/                    Pinned third-party libraries (no CDN, no build step)
   marked/                  marked 18.1.1 (MIT)
   dompurify/               DOMPurify 3.4.17 (Apache-2.0 / MPL-2.0)

@@ -75,19 +75,3 @@ function keepHeadingsWithNext(root) {
     if (next && !/^H[1-6]$/.test(next.tagName)) group.append(next);
   }
 }
-
-/**
- * Offer the PDF to the user: start a download, and return an object URL the
- * caller can show as a link for browsers that ignore downloads.
- */
-export function deliverPdf(blob, fileName) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName;
-  a.rel = 'noopener';
-  document.body.append(a);
-  a.click();
-  a.remove();
-  return url;
-}

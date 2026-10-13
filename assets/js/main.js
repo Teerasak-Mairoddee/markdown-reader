@@ -6,6 +6,7 @@ import { renderMarkdown, fileNameFromPath, HEADING_ID_PREFIX } from './renderer.
 import { els, renderFileList, renderToc, showDocument, showEmpty, setSidebarOpen, toast } from './view.js';
 import { initTheme } from './theme.js';
 import { initPrint } from './print.js';
+import { initPaste } from './paste.js';
 
 const SAMPLE_URL = 'samples/welcome.md';
 
@@ -96,6 +97,12 @@ function init() {
   bindDropTarget(document.getElementById('drag-overlay'), handleFiles);
 
   document.getElementById('sample-btn').addEventListener('click', loadSample);
+
+  initPaste({
+    openers: [document.getElementById('paste-btn'), document.getElementById('paste-start-btn')],
+    onPreview: (doc) => { store.addDocs([doc]); setSidebarOpen(false); },
+    notify: toast,
+  });
 
   initPrint({
     button: els.pdfBtn,
