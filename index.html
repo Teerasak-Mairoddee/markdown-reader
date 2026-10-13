@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Upload Markdown files, read them as a clean document, and save them as PDF.">
+  <meta name="color-scheme" content="light dark">
+  <title>Markdown Reader</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/document.css">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+
+  <link rel="stylesheet" href="vendor/highlight/styles/github.min.css" id="hljs-light">
+  <link rel="stylesheet" href="vendor/highlight/styles/github-dark.min.css" id="hljs-dark" disabled>
+
+  <script>
+    // Apply the saved theme before first paint to avoid a flash.
+    try {
+      const t = localStorage.getItem('mdr-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    } catch {}
+  </script>
+  <script type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+  <header class="toolbar" role="banner">
+    <div class="toolbar__brand">
+      <button class="icon-btn toolbar__menu" id="sidebar-toggle" type="button"
+              aria-label="Toggle file list" aria-controls="sidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <span class="toolbar__title">Markdown Reader</span>
+    </div>
+
+    <div class="toolbar__doc" id="doc-name" aria-live="polite"></div>
+
+    <div class="toolbar__actions">
+      <label class="btn btn--ghost" for="file-input">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-5 5m5-5l5 5M4 20h16"/></svg>
+        <span>Open</span>
+      </label>
+      <input id="file-input" class="visually-hidden" type="file" multiple
+             accept=".md,.markdown,.mdown,.mkd,.txt,text/markdown,text/plain,image/*">
+
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+
+      <button class="btn btn--primary" id="pdf-btn" type="button" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 01-1-1v-6a2 2 0 012-2h14a2 2 0 012 2v6a1 1 0 01-1 1h-2M6 14h12v7H6z"/></svg>
+        <span>Save as PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Documents">
+      <section class="sidebar__section">
+        <h2 class="sidebar__heading">Files</h2>
+        <ul class="file-list" id="file-list"></ul>
+        <p class="sidebar__empty" id="file-list-empty">No files yet.</p>
+      </section>
+      <section class="sidebar__section" id="toc-section" hidden>
+        <h2 class="sidebar__heading">Contents</h2>
+        <nav class="toc" id="toc" aria-label="Table of contents"></nav>
+      </section>
+    </aside>
+
+    <main class="main" id="main">
+      <section class="dropzone" id="dropzone" aria-labelledby="dropzone-title">
+        <div class="dropzone__inner">
+          <svg class="dropzone__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M12 18v-6m0 0l-3 3m3-3l3 3"/></svg>
+          <h1 id="dropzone-title">Drop Markdown files here</h1>
+          <p>or <label for="file-input" class="link">browse your device</label>.
+             Add images referenced by the Markdown in the same drop to show them inline.</p>
+          <button type="button" class="btn btn--ghost" id="sample-btn">Try a sample document</button>
+          <p class="dropzone__note">Files are read in your browser and never uploaded anywhere.</p>
+        </div>
+      </section>
+
+      <article class="document markdown-body" id="document" hidden></article>
+    </main>
+  </div>
+
+  <div class="drag-overlay" id="drag-overlay" hidden>
+    <p>Drop to open</p>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* Print / Save as PDF: only the rendered document, always light. */
+
+@page {
+  size: auto;
+  margin: 18mm 16mm;
+}
+
+:root,
+:root[data-theme="dark"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --border: #d0d7de;
+  --text: #111111;
+  --text-muted: #57606a;
+  --accent: #1d4ed8;
+  --code-bg: #f6f8fa;
+  --quote: #57606a;
+  color-scheme: light;
+}
+
+html, body { height: auto; background: #fff !important; }
+
+body {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.toolbar,
+.sidebar,
+.dropzone,
+.drag-overlay,
+.toast,
+.heading-anchor { display: none !important; }
+
+.shell { display: block; min-height: 0; }
+.main { padding: 0; }
+
+.document {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.markdown-body { font-size: 11pt; line-height: 1.55; }
+
+/* Keep headings with the content that follows them. */
+.markdown-body :is(h1, h2, h3, h4, h5, h6) {
+  break-after: avoid;
+  page-break-after: avoid;
+  break-inside: avoid;
+}
+
+.markdown-body :is(pre, blockquote, table, img, figure, details, tr) {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.markdown-body p,
+.markdown-body li { orphans: 3; widows: 3; }
+
+/* Wrap long code instead of clipping it off the page. */
+.markdown-body pre {
+  overflow: visible;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.markdown-body table { display: table; width: auto; max-width: 100%; overflow: visible; }
+
+.markdown-body a { color: var(--accent); text-decoration: underline; }
+
+/* Show where external links point, since they cannot be clicked on paper. */
+.markdown-body a.print-url::after {
+  content: " (" attr(href) ")";
+  color: var(--text-muted);
+  font-size: .85em;
+  word-break: break-all;
+}
