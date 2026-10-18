@@ -20,6 +20,11 @@ plans, specs, notes and summaries. We wanted to read them in a separate window
 without switching away from the project window, and to keep several of those
 documents open at once so we can move between them.
 
+We also didn't want to spend Claude tokens on rendering or converting documents,
+a job a static GitHub Pages site can do for free. And Markdown is easier to read
+the way it was meant to look, with headings, tables and highlighted code, than
+as raw text.
+
 ## Features
 
 - Open `.md` files with the **Open** button or by dragging them onto the page
