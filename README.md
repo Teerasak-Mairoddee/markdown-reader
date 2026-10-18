@@ -3,9 +3,22 @@
 A static web app for GitHub Pages: open Markdown files, read them as a clean
 formatted document, and save that view as a PDF.
 
-**Live site:** https://teerasak-mairoddee.github.io/markdown-reader/
+**[Open the live site](https://teerasak-mairoddee.github.io/markdown-reader/)**
 
 Everything runs in the browser. Files are never uploaded anywhere.
+
+![Several Markdown files open in the reader, with the file list and table of contents in the sidebar](docs/screenshots/reader-light.png)
+
+| Dark theme | On a phone |
+| --- | --- |
+| ![The reader in dark theme showing a plan with a table and highlighted code](docs/screenshots/reader-dark.png) | ![The reader on a narrow phone screen](docs/screenshots/mobile.png) |
+
+## Why we built this
+
+When working with Claude, a project fills up with Markdown files: `CLAUDE.md`,
+plans, specs, notes and summaries. We wanted to read them in a separate window
+without switching away from the project window, and to keep several of those
+documents open at once so we can move between them.
 
 ## Features
 
@@ -49,6 +62,7 @@ vendor/                    Pinned third-party libraries (no CDN, no build step)
   highlight/               highlight.js 11.11.1 (BSD-3-Clause)
   html2pdf/                html2pdf.js 0.14.0 (MIT), loaded only for the PDF fallback
 samples/welcome.md         Sample document
+docs/screenshots/          Screenshots used in this README
 .github/workflows/         GitHub Pages deployment
 ```
 
