@@ -25,6 +25,9 @@ a job a static GitHub Pages site can do for free. And Markdown is easier to read
 the way it was meant to look, with headings, tables and highlighted code, than
 as raw text.
 
+Finally, we like to print Markdown files by saving them as PDFs, and to read
+documents away from the desk: on a break at work, or even between sets at the gym.
+
 ## Features
 
 - Open `.md` files with the **Open** button or by dragging them onto the page
